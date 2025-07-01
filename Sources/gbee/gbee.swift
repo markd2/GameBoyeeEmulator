@@ -8,5 +8,6 @@ struct gbee: ParsableCommand {
 
     mutating func run() throws {
         let data = try Data(contentsOf: URL(filePath: romFilePath))
+        print(data.count)
     }
 }

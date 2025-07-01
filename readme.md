@@ -6,6 +6,8 @@ five months ago as of the time of writing (July 1, 2025)  Then a couple of
 weeks ago was a [Getting Started](https://www.youtube.com/watch?v=SCHlyX2sFN8),
 which sounded reasonable.
 
+Expect this to be abandoned soon, but until then!
+
 ## Reference Materials
 
 * [Pan Docs](https://gbdev.io/pandocs/)
@@ -14,5 +16,17 @@ which sounded reasonable.
 * [CPU Instructions](https://rgbds.gbdev.io/docs/v0.9.2/gbz80.7)
 * [Instruction Set Grid](https://gbdev.io/gb-opcodes/optables/)
 
+## How to work
 
+Build with
+
+```
+swift build
+```
+
+Run with
+
+```
+swift run gbee [subcommand] [arguments]
+```
 

@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "gbee",
+    platforms: [
+      .macOS(.v15)
+    ],
     dependencies: [
       .package(
         url: "https://github.com/apple/swift-argument-parser",

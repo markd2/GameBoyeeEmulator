@@ -1,8 +1,12 @@
+import Foundation
 import ArgumentParser
 
 @main
-struct gbee {
-    static func main() {
-        print("splunge")
+struct gbee: ParsableCommand {
+    @Argument(help: "Rom File to dump")
+    var romFilePath: String
+
+    mutating func run() throws {
+        let data = try Data(contentsOf: URL(filePath: romFilePath))
     }
 }

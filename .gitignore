@@ -1,5 +1,6 @@
 # Local
 
+roms/*.gb
 .build
 oopack
 *.xcmergebackup

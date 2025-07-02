@@ -30,3 +30,9 @@ Run with
 swift run gbee [subcommand] [arguments]
 ```
 
+In particular, currently there is no subcommand, and a single argument
+for a rom file.  So run with
+
+```
+swift run gbee roms/super-mario-land.gb
+```

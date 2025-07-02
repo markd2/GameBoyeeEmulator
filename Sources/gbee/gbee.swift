@@ -7,7 +7,7 @@ struct gbee: ParsableCommand {
     var romFilePath: String
 
     mutating func run() throws {
-        let data = try Data(contentsOf: URL(filePath: romFilePath))
-        print(data.count)
+        let romFile = try RomFile(fileLocation: URL(filePath: self.romFilePath))
+        romFile.splunge()
     }
 }

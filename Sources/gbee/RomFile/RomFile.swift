@@ -16,6 +16,27 @@ class RomFile {
     func splunge() {
         entryPoint()
         nintendoLogo()
+        title()
+    }
+    func title() {
+        data.withUnsafeBytes { rawBufferPointer in
+            let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
+            var title = ""
+
+            // "in later cartridges, the manufacture code lives in 
+            // 0x13f .. 0143 (in ascii).  Don't have a rom yet with that,
+            // so for now just look at all the title bytes.
+            for i in 0x134 ... 0x143 {
+                let asciiByte = rawBufferPointer[i]
+                guard asciiByte != 0 else {
+                    break
+                }
+                let unicodeScalar = UnicodeScalar(asciiByte)
+                let character = Character(unicodeScalar)
+                title.append(character)
+            }
+            print(title)
+        }
     }
 
     func nintendoLogo() {

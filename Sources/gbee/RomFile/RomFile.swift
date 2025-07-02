@@ -15,6 +15,24 @@ class RomFile {
     }
 
     func splunge() {
-        print("Splunge")
+        entryPoint()
+    }
+
+    func entryPoint() {
+        data.withUnsafeBytes { rawBufferPointer in
+            let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
+            for i in 0 ..< 4 {
+                let byte = basePointer[0x100 + i]
+                let blah = switch byte {
+                case 0x00:
+                    "00: nop"
+                case 0xC3:
+                    "C3: jp"
+                default:
+                    String(format: "%02x", byte)
+                }
+                print(blah)
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ Expect this to be abandoned soon, but until then!
 * [GB Development community](https://gbdev.io/)
 * [CPU Instructions](https://rgbds.gbdev.io/docs/v0.9.2/gbz80.7)
 * [Instruction Set Grid](https://gbdev.io/gb-opcodes/optables/)
+* [Cartridge Header](https://gbdev.io/pandocs/The_Cartridge_Header.html)
 
 ## How to work
 

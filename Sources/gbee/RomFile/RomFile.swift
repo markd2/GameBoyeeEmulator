@@ -17,8 +17,23 @@ class RomFile {
         entryPoint()
         nintendoLogo()
         title()
-        if oldLicenseeCode() == 0x33 {
-            print("NEED TO DO NEW LICENSEE CODE")
+        let oldCode = Int(oldLicenseeCode())
+        if oldCode == 0x33 {
+            let licensee = lookupOldLicenseeCode(code: oldCode)
+            print("(old)licensee: \(licensee) \(oldCode)")
+        } else {
+            let newCode = newLicenseeCode()
+            let licensee = lookupNewLicenseeCode(code: newCode)
+            print("(new)licensee: \(licensee) \(newCode)")
+        }
+    }
+
+    func newLicenseeCode() -> String {
+        data.withUnsafeBytes { rawBufferPointer in
+            let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
+            
+            let code = String(bytes: UnsafeBufferPointer(start: basePointer + 0x144, count: 2), encoding: .ascii) ?? ""
+            return code
         }
     }
 
@@ -26,8 +41,6 @@ class RomFile {
         data.withUnsafeBytes { rawBufferPointer in
             let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
             let code = basePointer[0x14b]
-            print(code)
-            print(lookupOldLicenseeCode(code: Int(code)))
             return code
         }
     }

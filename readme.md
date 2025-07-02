@@ -37,3 +37,23 @@ for a rom file.  So run with
 ```
 swift run gbee roms/super-mario-land.gb
 ```
+
+Currently prints out ROM information.  Like a cheesy disassembly of the
+first four bytes at location 0x100, and then the nintendo logo done in
+probably the most inefficient way possible.  Hey, otherwise my M4 will
+just be sitting here idling, bored.
+
+```
+00: nop
+C3: jp
+50
+01
+**   ** **                             **       
+***  ** **        **                   **       
+***  **          ****                  **       
+** * ** ** ** **  **  ****  ** **   *****  **** 
+** * ** ** *** ** ** **  ** *** ** **  ** **  **
+**  *** ** **  ** ** ****** **  ** **  ** **  **
+**  *** ** **  ** ** **     **  ** **  ** **  **
+**   ** ** **  ** **  ***** **  **  *****  **** 
+```

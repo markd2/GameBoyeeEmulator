@@ -11,7 +11,6 @@ class RomFile {
         self.url = fileLocation
 
         self.data = try Data(contentsOf: url)
-        print(data.count)
     }
 
     func splunge() {
@@ -20,13 +19,12 @@ class RomFile {
     }
 
     func nintendoLogo() {
-        print(0x11b - 0x104)
-        print(0x133 - 0x104)
         data.withUnsafeBytes { rawBufferPointer in
             let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
-            // top half
+
+            // accumulate the 4-"pixels" as little strings
             var pixels: [String] = []
-            for i in 0x104 ... 0x11B {
+            for i in 0x104 ... 0x133 {
                 let byte = basePointer[i]
                 // for each half, each nibble encodes 4 pixels
                 //    the MSB to the left-most pixel
@@ -45,23 +43,35 @@ class RomFile {
                 }
 
                 // bottom nibble
-                var bottom = byte >> 4
+                var bottom = byte
                 var bottomFourPixGroup = ""
                 for _ in 0 ..< 4 {
                     bottomFourPixGroup += (bottom & 0x01 == 0) ? " " : "*"
                     bottom = bottom >> 1
                 }
-
-                pixels.append(topFourPixGroup)
-                pixels.append(bottomFourPixGroup)
+                
+                pixels.append(String(topFourPixGroup.reversed()))
+                pixels.append(String(bottomFourPixGroup.reversed()))
             }
 
+            // print top half
             for y in 0 ..< 4 {
                 for x in 0 ..< 12 {
-                    print(pixels[y + x * 4], terminator: "")
+                    let index = y + x * 4
+                    print(pixels[index], terminator: "")
                 }
                 print("")
             }
+
+            // print bottom half
+            for y in 0 ..< 4 {
+                for x in 0 ..< 12 {
+                    let index = y + x * 4 + 24*2
+                    print(pixels[index], terminator: "")
+                }
+                print("")
+            }
+
         }
     }
 

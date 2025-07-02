@@ -40,8 +40,8 @@ swift run gbee roms/super-mario-land.gb
 
 Currently prints out ROM information.  Like a cheesy disassembly of the
 first four bytes at location 0x100, and then the nintendo logo done in
-probably the most inefficient way possible.  Hey, otherwise my M4 will
-just be sitting here idling, bored.
+probably the most inefficient way possible. (otherwise my M4 will
+just be sitting here idling, bored), followed by the title, and vendor.
 
 ```
 00: nop
@@ -56,4 +56,6 @@ C3: jp
 **  *** ** **  ** ** ****** **  ** **  ** **  **
 **  *** ** **  ** ** **     **  ** **  ** **  **
 **   ** ** **  ** **  ***** **  **  *****  **** 
+SUPER MARIOLAND
+nintendo
 ```

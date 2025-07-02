@@ -46,7 +46,7 @@ class RomFile {
             // setting bit 7 will trigger a write of this register vale
             // to KEY0 register which sets the CPU mode
             for i in 0x134 ... 0x143 {
-                let asciiByte = rawBufferPointer[i]
+                let asciiByte = basePointer[i]
                 guard asciiByte != 0 else {
                     break
                 }

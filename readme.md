@@ -15,6 +15,7 @@ Expect this to be abandoned soon, but until then!
 * [GB Development community](https://gbdev.io/)
 * [CPU Instructions](https://rgbds.gbdev.io/docs/v0.9.2/gbz80.7)
 * [Instruction Set Grid](https://gbdev.io/gb-opcodes/optables/)
+* [Cartridge Header](https://gbdev.io/pandocs/The_Cartridge_Header.html)
 
 ## How to work
 
@@ -30,3 +31,31 @@ Run with
 swift run gbee [subcommand] [arguments]
 ```
 
+In particular, currently there is no subcommand, and a single argument
+for a rom file.  So run with
+
+```
+swift run gbee roms/super-mario-land.gb
+```
+
+Currently prints out ROM information.  Like a cheesy disassembly of the
+first four bytes at location 0x100, and then the nintendo logo done in
+probably the most inefficient way possible. (otherwise my M4 will
+just be sitting here idling, bored), followed by the title, and vendor.
+
+```
+00: nop
+C3: jp
+50
+01
+**   ** **                             **       
+***  ** **        **                   **       
+***  **          ****                  **       
+** * ** ** ** **  **  ****  ** **   *****  **** 
+** * ** ** *** ** ** **  ** *** ** **  ** **  **
+**  *** ** **  ** ** ****** **  ** **  ** **  **
+**  *** ** **  ** ** **     **  ** **  ** **  **
+**   ** ** **  ** **  ***** **  **  *****  **** 
+SUPER MARIOLAND
+nintendo
+```

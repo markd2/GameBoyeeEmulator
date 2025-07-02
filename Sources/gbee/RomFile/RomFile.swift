@@ -17,15 +17,34 @@ class RomFile {
         entryPoint()
         nintendoLogo()
         title()
+        if oldLicenseeCode() == 0x33 {
+            print("NEED TO DO NEW LICENSEE CODE")
+        }
     }
+
+    func oldLicenseeCode() -> UInt8 {
+        data.withUnsafeBytes { rawBufferPointer in
+            let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
+            let code = basePointer[0x14b]
+            print(code)
+            print(lookupOldLicenseeCode(code: Int(code)))
+            return code
+        }
+    }
+
     func title() {
         data.withUnsafeBytes { rawBufferPointer in
             let basePointer = rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self)
             var title = ""
 
             // "in later cartridges, the manufacture code lives in 
-            // 0x13f .. 0143 (in ascii).  Don't have a rom yet with that,
+            // 0x13f .. 0x142 (in ascii).  Don't have a rom yet with that,
             // so for now just look at all the title bytes.
+            // and 0x143 has a color game boy tag. $80 = supports CGB but
+            // is monochrome compatable.
+            // $C0 is works on CGB only)
+            // setting bit 7 will trigger a write of this register vale
+            // to KEY0 register which sets the CPU mode
             for i in 0x134 ... 0x143 {
                 let asciiByte = rawBufferPointer[i]
                 guard asciiByte != 0 else {
